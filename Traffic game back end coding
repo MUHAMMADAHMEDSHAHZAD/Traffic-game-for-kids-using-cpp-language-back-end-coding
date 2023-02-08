@@ -1,0 +1,34 @@
+#include <iostream>
+#include <chrono>
+#include <thread>
+
+enum class Light {
+  Green,
+  Yellow,
+  Red
+};
+
+int main() {
+  Light currentLight = Light::Green;
+
+  while (true) {
+    switch (currentLight) {
+      case Light::Green:
+        std::cout << "Green light: Go!" << std::endl;
+        currentLight = Light::Yellow;
+        break;
+      case Light::Yellow:
+        std::cout << "Yellow light: Slow down!" << std::endl;
+        currentLight = Light::Red;
+        break;
+      case Light::Red:
+        std::cout << "Red light: Stop!" << std::endl;
+        currentLight = Light::Green;
+        break;
+    }
+
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
+
+  return 0;
+}
